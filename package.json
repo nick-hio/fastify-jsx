@@ -1,0 +1,46 @@
+{
+  "name": "fastify-jsx",
+  "description": "Render JSX payloads from Fastify routes.",
+  "author": "nick-hio",
+  "homepage": "https://github.com/nick-hio/jhx/tree/main/packages/fastify-jsx#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nick-hio/fastify-jsx.git"
+  },
+  "license": "MIT",
+  "version": "0.1.0",
+  "files": [
+    "README.md",
+    "dist/index.js",
+    "dist/index.cjs"
+  ],
+  "type": "module",
+  "module": "src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "clean": "git clean -xdf ./dist",
+    "build": "bun build.js",
+    "build:types": "rollup -c rollup.config.js"
+  },
+  "dependencies": {
+    "fastify-plugin": "^5.1.0"
+  },
+  "peerDependencies": {
+    "fastify": "^5",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "typescript": "^5"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^25.0.3",
+    "rollup": "^4.54.0",
+    "rollup-plugin-dts": "^6.3.0"
+  }
+}
