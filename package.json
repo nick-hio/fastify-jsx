@@ -11,6 +11,7 @@
   "version": "0.1.0",
   "files": [
     "README.md",
+    "LICENSE",
     "dist/index.js",
     "dist/index.cjs"
   ],
