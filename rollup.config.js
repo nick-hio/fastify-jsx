@@ -4,6 +4,7 @@ import { dts } from 'rollup-plugin-dts';
 export default {
     external: [
         'fastify',
+        'node:http',
     ],
     input: './src/index.ts',
     output: {
