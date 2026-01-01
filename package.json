@@ -25,7 +25,8 @@
   },
   "scripts": {
     "clean": "git clean -xdf ./dist",
-    "build": "bun build.js",
+    "build": "npm run build:lib && npm run build:types",
+    "build:lib": "bun esbuild.js",
     "build:types": "rollup -c rollup.config.js"
   },
   "dependencies": {
@@ -40,6 +41,9 @@
   "devDependencies": {
     "@types/bun": "latest",
     "@types/node": "^25.0.3",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "esbuild": "^0.27.2",
     "rollup": "^4.54.0",
     "rollup-plugin-dts": "^6.3.0"
   }
