@@ -9,7 +9,10 @@ export const config = {
     ],
     external: [
         'fastify',
-        'node:http'
+        'node:http',
+        'node:stream',
+        'react',
+        'react-dom',
     ],
     jsx: 'preserve',
     keepNames: true,

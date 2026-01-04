@@ -5,6 +5,9 @@ export default {
     external: [
         'fastify',
         'node:http',
+        'node:stream',
+        'react',
+        'react-dom',
     ],
     input: './src/index.ts',
     output: {
