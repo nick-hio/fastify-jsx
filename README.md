@@ -1,6 +1,6 @@
 # fastify-jsx
 
-[![NPM version](https://img.shields.io/npm/v/nick-hio/fastify-jsx.svg?style=flat)](https://www.npmjs.com/package/nick-hio/fastify-jsx)
+[![NPM version](https://img.shields.io/npm/v/fastify-jsx.svg?style=flat)](https://www.npmjs.com/package/fastify-jsx)
 
 Fastify plugin for sending JSX as HTML responses.
 

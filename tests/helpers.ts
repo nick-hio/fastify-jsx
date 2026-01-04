@@ -1,6 +1,6 @@
 import Fastify from 'fastify';
 import { fastifyJsx } from '../src';
-import type { FastifyJsxOptions } from '../src';
+import type { FastifyJsxOptions } from '../dist/index';
 import { expect } from 'bun:test';
 import type { FastifyInstance } from 'fastify';
 

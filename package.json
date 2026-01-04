@@ -7,6 +7,15 @@
     "type": "git",
     "url": "git+https://github.com/nick-hio/fastify-jsx.git"
   },
+  "keywords": [
+    "fastify",
+    "fastify-plugin",
+    "plugin",
+    "jsx",
+    "react",
+    "react-dom",
+    "typescript"
+  ],
   "license": "MIT",
   "version": "0.1.0",
   "files": [
@@ -28,7 +37,7 @@
     "build": "npm run build:lib && npm run build:types",
     "build:lib": "bun build.js",
     "build:types": "rollup -c rollup.config.js",
-    "test": "bun test"
+    "test": "npm run build && bun test"
   },
   "dependencies": {
     "fastify-plugin": "^5.1.0"
