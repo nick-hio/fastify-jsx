@@ -8,7 +8,7 @@ export type FastifyJsxOptions = {
 
 export const fastifyJsx = fp<FastifyJsxOptions>((fastify, opts, done) => {
     if (!['string', 'static'].includes(opts.render ?? '')) {
-        fastify.log.error(`[fastify-jsx] Initialization Error: Invalid render option '${opts.render}'. Using the default 'static' option.`);
+        fastify.log.warn(`[fastify-jsx] Invalid Render Option: '${opts.render}'. Using the default 'static' option.`);
     }
     const renderFunction = opts.render === 'string' ? renderToString : renderToStaticMarkup;
 

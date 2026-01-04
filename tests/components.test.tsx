@@ -1,10 +1,11 @@
 import { describe, it } from 'bun:test';
 import { buildServer, expectResponse } from './helpers';
+import type { ReactNode } from "react";
 
 const Heading = ({ text }: { text: string }) => <h1>{text}</h1>;
 
-const Layout = ({ children }: { children: React.ReactNode }) => (
-    <html>
+const Layout = ({ children }: { children: ReactNode }) => (
+    <html lang="en">
         <head>
             <title>Test</title>
         </head>
@@ -40,7 +41,7 @@ describe('[fastifyJsx] Components', () => {
         ));
 
         const res = await fastify.inject({ method: 'GET', url: '/' });
-        expectResponse(res, '<html><head><title>Test</title></head><body><div>Page Content</div></body></html>');
+        expectResponse(res, '<html lang="en"><head><title>Test</title></head><body><div>Page Content</div></body></html>');
     });
 
     it('should render component with array mapping', async () => {
@@ -81,6 +82,6 @@ describe('[fastifyJsx] Components', () => {
         ));
 
         const res = await fastify.inject({ method: 'GET', url: '/' });
-        expectResponse(res, '<html><head><title>Test</title></head><body><h1>Home</h1><ul><li>One</li><li>Two</li></ul></body></html>');
+        expectResponse(res, '<html lang="en"><head><title>Test</title></head><body><h1>Home</h1><ul><li>One</li><li>Two</li></ul></body></html>');
     });
 });

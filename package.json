@@ -25,7 +25,6 @@
     }
   },
   "scripts": {
-    "clean": "git clean -xdf ./dist",
     "build": "npm run build:lib && npm run build:types",
     "build:lib": "bun esbuild.js",
     "build:types": "rollup -c rollup.config.js",
