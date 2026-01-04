@@ -1,6 +1,6 @@
 {
   "name": "fastify-jsx",
-  "description": "Render JSX payloads from Fastify routes.",
+  "description": "Fastify plugin for sending JSX as HTML responses.",
   "author": "nick-hio",
   "homepage": "https://github.com/nick-hio/jhx/tree/main/packages/fastify-jsx#readme",
   "repository": {

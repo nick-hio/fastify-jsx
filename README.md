@@ -54,23 +54,21 @@ fastify.get('/send', (request, reply) => {
 
 ### `render`
 
-Chooses the JSX rendering function.
+Chooses the JSX rendering function from `react-dom/server`. Defaults to `'static'`.
 
-| Value      | Description                                                                                                                    |
-|------------|--------------------------------------------------------------------------------------------------------------------------------|
-| `'static'` | Uses the `renderToStaticMarkup` function from `react-dom/server`. Outputs static HTML without React data attributes (Default). |
-| `'string'` | Uses the `renderToString` function from `react-dom/server`. Outputs HTML with React data attributes for client-side hydration. |
+- `'static'`: Uses the `renderToStaticMarkup` function. Renders static HTML without React attributes.
+- `'string'`: Uses the `renderToString` function. Renders HTML with React attributes for client-side hydration.
 
 ```jsx
 // ESM
 fastify.register(fastifyJsx) // Render to static HTML
-fastify.register(fastifyJsx, { render: 'string' }) // Render to HTML with hydration support
+fastify.register(fastifyJsx, { render: 'string' }) // Render to HTML with hydration
 ```
 
 ```jsx
 // CJS
 fastify.register(require('fastify-jsx')) // Render to static HTML
-fastify.register(require('fastify-jsx'), { render: 'string' }) // Render to HTML with hydration support
+fastify.register(require('fastify-jsx'), { render: 'string' }) // Render to HTML with hydration
 ```
 
 ## License
