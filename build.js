@@ -14,7 +14,7 @@ export const config = {
         'react',
         'react-dom',
     ],
-    jsx: 'react-jsx',
+    jsx: 'preserve',
     keepNames: true,
     logLevel: 'info',
     minify: true,
