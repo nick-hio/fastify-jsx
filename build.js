@@ -14,7 +14,7 @@ export const config = {
         'react',
         'react-dom',
     ],
-    jsx: 'preserve',
+    jsx: 'react-jsx',
     keepNames: true,
     logLevel: 'info',
     minify: true,
@@ -53,8 +53,7 @@ export const config = {
             esmBuild.warnings.forEach((warning) => console.warn(`  - ${warning.location.file} (line ${warning.location.line}): ${warning.text}`));
         }
     } catch (e) {
-        console.error('❌  Build failed:');
-        console.error(e);
+        console.error('❌  Build failed:', e);
         process.exit(1);
     }
 })();
