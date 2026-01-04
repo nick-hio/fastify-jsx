@@ -2,7 +2,7 @@
   "name": "fastify-jsx",
   "description": "Fastify plugin for sending JSX as HTML responses.",
   "author": "nick-hio",
-  "homepage": "https://github.com/nick-hio/jhx/tree/main/packages/fastify-jsx#readme",
+  "homepage": "https://github.com/nick-hio/fastify-jsx#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nick-hio/fastify-jsx.git"
@@ -17,10 +17,11 @@
     "typescript"
   ],
   "license": "MIT",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "files": [
     "README.md",
     "LICENSE",
+    "dist/index.d.ts",
     "dist/index.js",
     "dist/index.cjs"
   ],
@@ -43,10 +44,10 @@
     "fastify-plugin": "^5.1.0"
   },
   "peerDependencies": {
-    "fastify": "^5",
+    "fastify": "^5.6.2",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "typescript": "^5"
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@types/bun": "latest",
