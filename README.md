@@ -4,14 +4,18 @@ Fastify plugin for sending JSX as HTML responses.
 
 ## Install
 
-Install using your preferred package manager:
-
 ```bash
 pnpm install fastify-jsx
 npm install fastify-jsx
 bun add fastify-jsx
 yarn add fastify-jsx
 ```
+
+### Compatibility
+
+| Plugin Version | Fastify Version |
+|----------------|-----------------|
+| `^0.1.x`       | `^5.x`          |
 
 ## Usage
 
@@ -48,11 +52,11 @@ fastify.get('/send', (request, reply) => {
 
 ### `render`
 
-Chooses the JSX rendering method (Defaults to `'static'`).
+Chooses the JSX rendering function.
 
 | Value      | Description                                                                                                                    |
 |------------|--------------------------------------------------------------------------------------------------------------------------------|
-| `'static'` | Uses the `renderToStaticMarkup` function from `react-dom/server`. Outputs static HTML without React data attributes.           |
+| `'static'` | Uses the `renderToStaticMarkup` function from `react-dom/server`. Outputs static HTML without React data attributes (Default). |
 | `'string'` | Uses the `renderToString` function from `react-dom/server`. Outputs HTML with React data attributes for client-side hydration. |
 
 ```jsx
@@ -69,4 +73,4 @@ fastify.register(require('fastify-jsx'), { render: 'string' }) // Render to HTML
 
 ## License
 
-Licensed under [MIT](./LICENSE)
+Licensed under [MIT](./LICENSE).
