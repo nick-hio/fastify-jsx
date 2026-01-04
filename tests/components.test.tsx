@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'bun:test';
+import { describe, it } from 'bun:test';
 import { buildServer, expectResponse } from './helpers';
 
 const Heading = ({ text }: { text: string }) => <h1>{text}</h1>;
@@ -27,9 +27,7 @@ describe('[fastifyJsx] Components', () => {
         fastify.get('/', () => <Heading text="Welcome" />);
 
         const res = await fastify.inject({ method: 'GET', url: '/' });
-
-        expect(res.statusCode).toBe(200);
-        expect(res.body).toBe('<h1>Welcome</h1>');
+        expectResponse(res, '<h1>Welcome</h1>');
     });
 
     it('should render component with children', async () => {
@@ -42,9 +40,7 @@ describe('[fastifyJsx] Components', () => {
         ));
 
         const res = await fastify.inject({ method: 'GET', url: '/' });
-
-        expect(res.statusCode).toBe(200);
-        expect(res.body).toContain('<body><div>Page Content</div></body>');
+        expectResponse(res, '<html><head><title>Test</title></head><body><div>Page Content</div></body></html>');
     });
 
     it('should render component with array mapping', async () => {
@@ -54,9 +50,7 @@ describe('[fastifyJsx] Components', () => {
         fastify.get('/', () => <List items={items} />);
 
         const res = await fastify.inject({ method: 'GET', url: '/' });
-
-        expect(res.statusCode).toBe(200);
-        expect(res.body).toBe('<ul><li>Apple</li><li>Banana</li><li>Cherry</li></ul>');
+        expectResponse(res, '<ul><li>Apple</li><li>Banana</li><li>Cherry</li></ul>');
     });
 
     it('should render component conditionally', async () => {
@@ -72,8 +66,8 @@ describe('[fastifyJsx] Components', () => {
         const visibleRes = await fastify.inject({ method: 'GET', url: '/visible' });
         const hiddenRes = await fastify.inject({ method: 'GET', url: '/hidden' });
 
-        expect(visibleRes.body).toBe('<div><span>Visible</span></div>');
-        expect(hiddenRes.body).toBe('<div></div>');
+        expectResponse(visibleRes, '<div><span>Visible</span></div>');
+        expectResponse(hiddenRes, '<div></div>');
     });
 
     it('should render nested components', async () => {
@@ -87,10 +81,6 @@ describe('[fastifyJsx] Components', () => {
         ));
 
         const res = await fastify.inject({ method: 'GET', url: '/' });
-
-        expect(res.statusCode).toBe(200);
-        expect(res.body).toContain('<h1>Home</h1>');
-        expect(res.body).toContain('<ul><li>One</li><li>Two</li></ul>');
+        expectResponse(res, '<html><head><title>Test</title></head><body><h1>Home</h1><ul><li>One</li><li>Two</li></ul></body></html>');
     });
 });
-

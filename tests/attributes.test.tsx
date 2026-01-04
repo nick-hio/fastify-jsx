@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'bun:test';
+import { describe, it } from 'bun:test';
 import { buildServer, expectResponse } from './helpers';
 
 describe('[fastifyJsx] HTML Attributes', () => {
@@ -10,10 +10,7 @@ describe('[fastifyJsx] HTML Attributes', () => {
         ));
 
         const res = await fastify.inject({ method: 'GET', url: '/' });
-
-        expect(res.statusCode).toBe(200);
-        expect(res.body).toContain('style="');
-        expect(res.body).toContain('color:red');
+        expectResponse(res, '<div style="color:red;font-size:16px">Styled</div>');
     });
 
     it(`should handle 'data-' attributes`, async () => {
@@ -24,10 +21,7 @@ describe('[fastifyJsx] HTML Attributes', () => {
         ));
 
         const res = await fastify.inject({ method: 'GET', url: '/' });
-
-        expect(res.statusCode).toBe(200);
-        expect(res.body).toContain('data-testid="main"');
-        expect(res.body).toContain('data-value="123"');
+        expectResponse(res, '<div data-testid="main" data-value="123">Content</div>');
     });
 
     it(`should handle 'aria-' attributes`, async () => {
@@ -38,9 +32,7 @@ describe('[fastifyJsx] HTML Attributes', () => {
         ));
 
         const res = await fastify.inject({ method: 'GET', url: '/' });
-
-        expect(res.statusCode).toBe(200);
-        expect(res.body).toContain('aria-label="Close"');
+        expectResponse(res, '<button aria-label="Close" aria-hidden="false">×</button>');
     });
 
     it(`should handle 'htmlFor' attribute`, async () => {
@@ -51,9 +43,7 @@ describe('[fastifyJsx] HTML Attributes', () => {
         ));
 
         const res = await fastify.inject({ method: 'GET', url: '/' });
-
-        expect(res.statusCode).toBe(200);
-        expect(res.body).toBe('<label for="email">Email</label>');
+        expectResponse(res, '<label for="email">Email</label>');
     });
 
     it(`should handle boolean attributes`, async () => {
@@ -67,10 +57,7 @@ describe('[fastifyJsx] HTML Attributes', () => {
         ));
 
         const res = await fastify.inject({ method: 'GET', url: '/' });
-
-        expect(res.statusCode).toBe(200);
-        expect(res.body).toContain('checked=""');
-        expect(res.body).toContain('disabled=""');
+        expectResponse(res, '<div><input type="checkbox" readOnly="" checked=""/><button disabled="">Disabled</button></div>');
     });
 
     it(`should handle quotes in attribute values`, async () => {
@@ -81,8 +68,6 @@ describe('[fastifyJsx] HTML Attributes', () => {
         ));
 
         const res = await fastify.inject({ method: 'GET', url: '/' });
-
-        expect(res.statusCode).toBe(200);
-        expect(res.body).toContain('title="He said \\"Hello\\""');
+        expectResponse(res, '<div title="He said &quot;Hello&quot;">Content</div>');
     });
 });

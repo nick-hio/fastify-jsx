@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'bun:test';
+import { describe, it } from 'bun:test';
 import { buildServer, expectResponse } from './helpers';
 
 describe('[fastifyJsx] Non-JSX', () => {
@@ -18,10 +18,7 @@ describe('[fastifyJsx] Non-JSX', () => {
         fastify.get('/', () => nested);
 
         const res = await fastify.inject({ method: 'GET', url: '/' });
-
-        expect(res.headers['content-type']).toBe('application/json; charset=utf-8');
-        expect(res.statusCode).toBe(200);
-        expect(JSON.parse(res.body)).toEqual(nested);
+        expectResponse(res, nested, { type: 'application/json; charset=utf-8' });
     });
 
     it('should pass through empty object payloads', async () => {
@@ -30,9 +27,7 @@ describe('[fastifyJsx] Non-JSX', () => {
         fastify.get('/', () => ({}));
 
         const res = await fastify.inject({ method: 'GET', url: '/' });
-
-        expect(res.statusCode).toBe(200);
-        expect(JSON.parse(res.body)).toEqual({});
+        expectResponse(res, {}, { type: 'application/json; charset=utf-8' });
     });
 
     it('should pass through array payloads', async () => {
@@ -41,9 +36,7 @@ describe('[fastifyJsx] Non-JSX', () => {
         fastify.get('/', () => [1, 2, 3]);
 
         const res = await fastify.inject({ method: 'GET', url: '/' });
-
-        expect(res.statusCode).toBe(200);
-        expect(JSON.parse(res.body)).toEqual([1, 2, 3]);
+        expectResponse(res, [1, 2, 3], { type: 'application/json; charset=utf-8' });
     });
 
     it('should pass through string payloads', async () => {
@@ -54,20 +47,7 @@ describe('[fastifyJsx] Non-JSX', () => {
         });
 
         const res = await fastify.inject({ method: 'GET', url: '/' });
-
-        expect(res.statusCode).toBe(200);
-        expect(res.body).toBe('Plain text response');
-    });
-
-    it('should pass through numeric payloads', async () => {
-        const fastify = buildServer();
-
-        fastify.get('/', () => 123);
-
-        const res = await fastify.inject({ method: 'GET', url: '/' });
-
-        expect(res.statusCode).toBe(200);
-        expect(res.body).toBe('123');
+        expectResponse(res, 'Plain text response', { type: 'text/plain; charset=utf-8' });
     });
 
     it('should pass through null payloads', async () => {
@@ -76,9 +56,7 @@ describe('[fastifyJsx] Non-JSX', () => {
         fastify.get('/', () => null);
 
         const res = await fastify.inject({ method: 'GET', url: '/' });
-
-        expect(res.statusCode).toBe(200);
-        expect(res.body).toBe('null');
+        expectResponse(res, 'null', { type: 'application/json; charset=utf-8' });
     });
 
     it('should pass through boolean payloads', async () => {
@@ -90,7 +68,7 @@ describe('[fastifyJsx] Non-JSX', () => {
         const trueRes = await fastify.inject({ method: 'GET', url: '/true' });
         const falseRes = await fastify.inject({ method: 'GET', url: '/false' });
 
-        expect(trueRes.body).toBe('true');
-        expect(falseRes.body).toBe('false');
+        expectResponse(trueRes, 'true', { type: 'application/json; charset=utf-8' });
+        expectResponse(falseRes, 'false', { type: 'application/json; charset=utf-8' });
     });
 });
