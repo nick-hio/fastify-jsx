@@ -7,11 +7,9 @@ import { renderToString, renderToStaticMarkup } from "react-dom/server";
  */
 export type FastifyJsxOptions = {
     /**
-     * Chooses the JSX rendering method.
-     * - `"static"`: Uses the `renderToStaticMarkup` function from `react-dom/server`. Outputs static HTML without React data attributes.
-     * - `"string"`: Uses the `renderToString` function from `react-dom/server`. Outputs HTML with React data attributes for client-side hydration.
-     *
-     * Defaults to `"static"`.
+     * Chooses the JSX rendering function from `react-dom/server`. Defaults to `'static'`.
+     * - `'static'`: Uses the `renderToStaticMarkup` function. Renders static HTML without React attributes.
+     * - `'string'`: Uses the `renderToString` function. Renders HTML with React attributes for client-side hydration.
      */
     render?: 'static' | 'string',
 };
