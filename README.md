@@ -1,8 +1,10 @@
 # fastify-jsx
 
-Send JSX from Fastify routes.
+Fastify plugin for sending JSX as HTML responses.
 
 ## Install
+
+Install using your preferred package manager:
 
 ```bash
 pnpm install fastify-jsx
@@ -24,7 +26,7 @@ fastify.register(fastifyJsx)
 fastify.get('/', () => (
     <div>JSX Payload</div>
 ))
-fastify.get('/', (request, reply) => {
+fastify.get('/send', (request, reply) => {
     reply.send(<div>JSX Payload</div>)
 })
 ```
@@ -37,11 +39,34 @@ fastify.register(require('fastify-jsx'))
 fastify.get('/', () => (
     <div>JSX Payload</div>
 ))
-fastify.get('/', (request, reply) => {
+fastify.get('/send', (request, reply) => {
     reply.send(<div>JSX Payload</div>)
 })
 ```
 
+## Options
+
+### `render`
+
+Chooses the JSX rendering method (Defaults to `'static'`).
+
+| Value      | Description                                                                                                                    |
+|------------|--------------------------------------------------------------------------------------------------------------------------------|
+| `'static'` | Uses the `renderToStaticMarkup` function from `react-dom/server`. Outputs static HTML without React data attributes.           |
+| `'string'` | Uses the `renderToString` function from `react-dom/server`. Outputs HTML with React data attributes for client-side hydration. |
+
+```jsx
+// ESM
+fastify.register(fastifyJsx) // Render to static HTML
+fastify.register(fastifyJsx, { render: 'string' }) // Render to HTML with hydration support
+```
+
+```jsx
+// CJS
+fastify.register(require('fastify-jsx')) // Render to static HTML
+fastify.register(require('fastify-jsx'), { render: 'string' }) // Render to HTML with hydration support
+```
+
 ## License
 
-Licensed under [MIT](./LICENSE).
+Licensed under [MIT](./LICENSE)

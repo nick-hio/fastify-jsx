@@ -2,10 +2,23 @@ import fp from "fastify-plugin";
 import { isValidElement } from "react";
 import { renderToString, renderToStaticMarkup } from "react-dom/server";
 
+/**
+ * Options for the `fastify-jsx` plugin.
+ */
 export type FastifyJsxOptions = {
-    render?: 'string' | 'static',
+    /**
+     * Chooses the JSX rendering method.
+     * - `"static"`: Uses the `renderToStaticMarkup` function from `react-dom/server`. Outputs static HTML without React data attributes.
+     * - `"string"`: Uses the `renderToString` function from `react-dom/server`. Outputs HTML with React data attributes for client-side hydration.
+     *
+     * Defaults to `"static"`.
+     */
+    render?: 'static' | 'string',
 };
 
+/**
+ * Fastify plugin for sending JSX as HTML responses.
+ */
 export const fastifyJsx = fp<FastifyJsxOptions>((fastify, opts, done) => {
     if (!['string', 'static'].includes(opts.render ?? '')) {
         fastify.log.warn(`[fastify-jsx] Invalid Render Option: '${opts.render}'. Using the default 'static' option.`);
